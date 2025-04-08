@@ -1,0 +1,385 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: var(--color-light);
+  text-decoration: none;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+    Убираем внутренние отступы слева тегам списков,
+    у которых есть атрибут class
+   */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+    Убираем внешние отступы body и двум другим тегам,
+    у которых есть атрибут class
+   */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+    Убираем внешние отступы вертикали нужным тегам,
+    у которых есть атрибут class
+   */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+    Убираем стандартный маркер маркированному списку,
+    у которого есть атрибут class
+   */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+    Обнуляем вертикальные внешние отступы параграфа,
+    объявляем локальную переменную для внешнего отступа вниз,
+    чтобы избежать взаимодействие с более сложным селектором
+   */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+    Внешний отступ вниз для параграфа без атрибута class,
+    который расположен не последним среди своих соседних элементов
+   */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+    Упрощаем работу с изображениями
+   */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+    Наследуем свойства шрифт для полей ввода
+   */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+}
+
+/**
+    Плавный скролл
+   */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+    Приводим к единому цвету svg-элементы
+   */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+    Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+   */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+    Удаляем все анимации и переходы для людей,
+    которые предпочитают их не использовать
+   */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --color-light: #ffffff;
+  --color-gray-light: #e7e7e7;
+  --color-dark: #111111;
+  --text-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+  --font-family-base: "Roboto", sans-serif;
+  --transition-duration: 0.2s;
+}
+
+.background__wrapper {
+  position: absolute;
+}
+.background__item {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.background__item > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.background__item--overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.background__item--showing {
+  opacity: 1;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dashboard__wrapper {
+  display: flex;
+  padding: 80px;
+  -moz-column-gap: 64px;
+       column-gap: 64px;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  animation: fadeIn 0.5s ease-out 0.5s forwards;
+  -webkit-backdrop-filter: blur(40px);
+          backdrop-filter: blur(40px);
+}
+
+.utility {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.utility__datetime {
+  align-items: start;
+  row-gap: 1em;
+}
+.utility__divider {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.utility__icon {
+  height: 1.5em;
+  aspect-ratio: 1;
+  margin-bottom: 0.5rem;
+}
+.utility__value {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.utility__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--color-light);
+  border-radius: 20px;
+}
+.utility__button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.utility__tools {
+  justify-content: space-between;
+  row-gap: 8px;
+}
+.time {
+  font-size: 6em;
+  font-weight: 700;
+  line-height: 1;
+  font-family: var(--font-family-base);
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.date {
+  font-size: 1.5em;
+  line-height: 1;
+  font-weight: 400;
+  opacity: 0.8;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+}
+
+.random-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather .utility__value::before {
+  content: "";
+  display: inline-block;
+  height: 1em;
+  aspect-ratio: 1;
+  margin-right: 0.25em;
+  position: relative;
+  left: 0;
+  top: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.sun-icon::before {
+  background-image: url(../images/svg/sun.svg);
+}
+
+.cloud-icon::before {
+  background-image: url(../images/svg/cloud.svg);
+}
+
+.rain-icon::before {
+  background-image: url(../images/svg/rain.svg);
+}
+
+.snow-icon::before {
+  background-image: url(../images/svg/snow.svg);
+}
+
+.icon {
+  height: 4em;
+  width: 4em;
+  background-color: var(--color-light);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=styles.css.map */

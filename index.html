@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="styles/styles.css"
+    />
+    <script
+      type="module"
+      src="scripts/main.js"
+    ></script>
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="background__wrapper">
+        <ul class="background__list">
+          <li class="background__item background__item--overlay background__item--showing"></li>
+          <li
+            class="background__item"
+            data-time="night"
+          >
+            <img
+              src="../images/01.jpg"
+              alt="Ночное изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="morning"
+          >
+            <img
+              src="../images/02.jpg"
+              alt="Утреннее изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="day"
+          >
+            <img
+              src="../images/03.jpg"
+              alt="Дневное изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="evening"
+          >
+            <img
+              src="../images/04.jpg"
+              alt="Вечернее изображение"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dashboard container">
+      <div class="dashboard__wrapper">
+        <div class="utility utility__datetime">
+          <div class="date"></div>
+          <div
+            id="time"
+            class="time"
+          ></div>
+        </div>
+        <div class="utility__divider"></div>
+        <div class="utility utility__tools">
+          <button class="utility__weather utility__button">
+            <div class="weather">
+              <div class="utility__value"></div>
+              <span class="utility__title city">Загрузка погоды</span>
+            </div>
+          </button>
+          <button class="utility__tasks utility__button">
+            <div class="tasks">
+              <div class="utility__icon">
+                <img
+                  src="images/svg/list.svg"
+                  alt=""
+                />
+              </div>
+              <span class="utility__title">Задачи</span>
+            </div>
+          </button>
+          <button class="utility__random-background utility__button">
+            <div class="random-background">
+              <div class="utility__icon">
+                <img
+                  src="images/svg/background-swipe.svg"
+                  alt=""
+                  width="24px"
+                  height="24px"
+                />
+              </div>
+              <span class="utility__title">Случайный фон</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

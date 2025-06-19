@@ -1,4 +1,4 @@
-let inputCity = "Краснодар";
+let inputCity = "Москва";
 
 async function updateDisplayWeather() {
   const displayTemperature = document.querySelector(".utility__value");

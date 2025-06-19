@@ -1,6 +1,6 @@
 let inputCity = "Москва";
 
-async function updateDisplayWeather() {
+export async function updateDisplayWeather() {
   const displayTemperature = document.querySelector(".utility__value");
   const displayCity = document.querySelector(".city");
 
@@ -59,5 +59,3 @@ function getWeatherIcon(wmoCode) {
     return "";
   }
 }
-
-export { updateDisplayWeather };

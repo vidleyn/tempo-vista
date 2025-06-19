@@ -1,4 +1,6 @@
-function changeBackground(currentHour) {
+import { getRandomInt } from "../utils/utils.js";
+
+export function changeBackground(currentHour) {
   console.log("CHANGING BG!!!");
 
   const allBackgrounds = document.querySelectorAll("[data-time]");
@@ -29,4 +31,5 @@ function changeBackground(currentHour) {
   }
 }
 
-export { changeBackground };
+const buttonTest = document.querySelector(".random-background");
+buttonTest.addEventListener("click", () => changeBackground(getRandomInt(0, 23)));

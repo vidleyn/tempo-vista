@@ -185,7 +185,7 @@ button:hover {
     display: block;
     height: 32px;
     width: 32px;
-    background-image: url(../images/svg/background-swipe.svg);
+    background-image: url(../assets/images/svg/background-swipe.svg);
   }
 
   &:hover {
@@ -207,19 +207,19 @@ button:hover {
 }
 
 .sun-icon::before {
-  background-image: url(../images/svg/sun.svg);
+  background-image: url(../assets/images/svg/sun.svg);
 }
 
 .cloud-icon::before {
-  background-image: url(../images/svg/cloud.svg);
+  background-image: url(../assets/images/svg/cloud.svg);
 }
 
 .rain-icon::before {
-  background-image: url(../images/svg/rain.svg);
+  background-image: url(../assets/images/svg/rain.svg);
 }
 
 .snow-icon::before {
-  background-image: url(../images/svg/snow.svg);
+  background-image: url(../assets/images/svg/snow.svg);
 }
 
 .icon {

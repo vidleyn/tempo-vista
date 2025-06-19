@@ -1,18 +1,28 @@
-import { getRandomInt } from "../utils/utils.js";
+import { date } from "../date-time";
+import { timeRanges } from "./time-ranges";
 
 export function changeBackground(currentHour) {
-  console.log("CHANGING BG!!!");
+  const timeOfDay = determineBackground(currentHour);
 
-  const allBackgrounds = document.querySelectorAll("[data-time]");
-  allBackgrounds.forEach((item) => item.classList.remove("background__item--showing"));
+  removeBackground();
+  setBackground(timeOfDay);
 
-  const timeRanges = {
-    night: [22, 23, 0, 1, 2, 3],
-    morning: [4, 5, 6, 7, 8, 9],
-    day: [10, 11, 12, 13, 14, 15],
-    evening: [16, 17, 18, 19, 20, 21],
-  };
+  console.log("Background has changed");
+}
 
+function removeBackground() {
+  const backgrounds = document.querySelectorAll("[data-time]");
+  backgrounds.forEach((item) => item.classList.remove("background__item--showing"));
+}
+
+function setBackground(timeOfDay) {
+  const backgroundElement = document.querySelector(`[data-time=${timeOfDay}]`);
+  if (backgroundElement) {
+    backgroundElement.classList.add("background__item--showing");
+  }
+}
+
+function determineBackground(currentHour) {
   let timeOfDay;
 
   if (timeRanges.night.includes(currentHour)) {
@@ -25,11 +35,9 @@ export function changeBackground(currentHour) {
     timeOfDay = "evening";
   }
 
-  const activeBackground = document.querySelector(`[data-time=${timeOfDay}]`);
-  if (activeBackground) {
-    activeBackground.classList.add("background__item--showing");
-  }
+  return timeOfDay;
 }
 
-const buttonTest = document.querySelector(".random-background");
-buttonTest.addEventListener("click", () => changeBackground(getRandomInt(0, 23)));
+window.addEventListener("newHour", () => {
+  changeBackground(date.getHours());
+});

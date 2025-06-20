@@ -140,6 +140,15 @@ button:hover {
   }
 }
 
+.buttons-wrapper {
+  display: flex;
+  gap: 8px;
+
+  @media screen and (max-width: 580px) {
+    flex-direction: column;
+  }
+}
+
 .time {
   font-size: 6em;
   font-weight: 700;
@@ -180,13 +189,13 @@ button:hover {
   border: none;
   border-radius: 40px;
 
-  &::before {
-    content: "";
-    display: block;
-    height: 32px;
-    width: 32px;
-    background-image: url(../assets/images/svg/background-swipe.svg);
-  }
+  // &::before {
+  //   content: "";
+  //   display: block;
+  //   height: 32px;
+  //   width: 32px;
+  //   background-image: url(../assets/images/svg/background-swipe.svg);
+  // }
 
   &:hover {
     opacity: 0.9;

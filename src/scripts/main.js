@@ -1,12 +1,14 @@
 import { updateTime, date } from "./date-time";
-import { changeBackground } from "./background";
-import { renderWeather } from "./weather";
-import { getRandomInt } from "./utils/utils.js";
+import { changeBackground, setRandomBackground } from "./background";
+import { renderWeather, changeCity } from "./weather";
 
 updateTime();
 setInterval(updateTime, 1000);
-renderWeather();
+renderWeather("Москва");
 changeBackground(date.getHours());
 
-const buttonTest = document.querySelector(".random-background");
-buttonTest.addEventListener("click", () => changeBackground(getRandomInt(0, 23)));
+const changeBackgroundButton = document.querySelector(".random-background");
+changeBackgroundButton.addEventListener("click", () => setRandomBackground());
+
+const changeCityButton = document.querySelector(".change-city");
+changeCityButton.addEventListener("click", () => changeCity());

@@ -2,11 +2,11 @@ import { getWeatherIcon } from "./icon-manager";
 
 let inputCity = "Москва";
 
-export async function renderWeather() {
+export async function renderWeather(сity) {
   const displayTemperature = document.querySelector(".utility__value");
   const displayCity = document.querySelector(".city");
 
-  let { temperature, city, wmoCode } = await getWeatherProcessedData();
+  let { temperature, city, wmoCode } = await getWeatherProcessedData(сity);
   let weatherIcon = document.querySelector(".weather .utility__value");
 
   displayTemperature.textContent = ``;
@@ -21,11 +21,23 @@ export async function renderWeather() {
   console.log("Weather has rendered");
 }
 
-async function getWeatherProcessedData() {
+export async function changeCity() {
+  inputCity = prompt("Укажите город", "");
+  if (!inputCity) return;
+
+  try {
+    await renderWeather(inputCity);
+  } catch (error) {
+    alert("Неправильно указан город");
+    changeCity();
+  }
+}
+
+async function getWeatherProcessedData(сity) {
   const weatherProcessedData = {};
 
-  const coordinates = await getCoordinates();
-  const rawWeatherData = await fetchWeatherRawData();
+  const coordinates = await getCoordinates(сity);
+  const rawWeatherData = await fetchWeatherRawData(сity);
 
   let currentTemperature = Math.round(rawWeatherData.current.temperature_2m);
 
@@ -36,26 +48,8 @@ async function getWeatherProcessedData() {
   return weatherProcessedData;
 }
 
-async function fetchWeatherRawData() {
-  const coordinates = await getCoordinates();
-
-  let weatherData = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&current=temperature_2m,precipitation,rain,showers,snowfall,weather_code,cloud_cover&timezone=Europe%2FMoscow&forecast_days=1`
-  );
-  weatherData = await weatherData.json();
-  return weatherData;
-}
-
-async function fetchCoordinatesRawData() {
-  let coordinatesData = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${inputCity}&count=1&language=ru&format=json`
-  );
-  coordinatesData = await coordinatesData.json();
-  return coordinatesData;
-}
-
-async function getCoordinates() {
-  const coordinatesRawData = await fetchCoordinatesRawData();
+async function getCoordinates(сity) {
+  const coordinatesRawData = await fetchCoordinatesRawData(сity);
   const coordinates = {};
 
   coordinates.latitude = coordinatesRawData.results[0].latitude;
@@ -63,6 +57,24 @@ async function getCoordinates() {
   coordinates.city = coordinatesRawData.results[0].name;
 
   return coordinates;
+}
+
+async function fetchCoordinatesRawData(сity) {
+  let coordinatesData = await fetch(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${сity}&count=1&language=ru&format=json`
+  );
+  coordinatesData = await coordinatesData.json();
+  return coordinatesData;
+}
+
+async function fetchWeatherRawData(сity) {
+  const coordinates = await getCoordinates(сity);
+
+  let weatherData = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&current=temperature_2m,precipitation,rain,showers,snowfall,weather_code,cloud_cover&timezone=Europe%2FMoscow&forecast_days=1`
+  );
+  weatherData = await weatherData.json();
+  return weatherData;
 }
 
 window.addEventListener("newHour", () => {

@@ -1,3 +1,5 @@
+// TODO: turn into type
+
 const iconCodes = {
   clearWeather: [0, 1, 2, 3],
   cloudyWeather: [45, 48, 51, 53, 55, 56, 57],
@@ -5,7 +7,7 @@ const iconCodes = {
   snowyWeather: [71, 73, 75, 77, 85, 86],
 };
 
-export function getWeatherIcon(wmoCode) {
+export function getWeatherIcon(wmoCode: number) {
   let icon = "";
 
   if (iconCodes.clearWeather.includes(wmoCode)) {

@@ -1,39 +1,49 @@
 import { getWeatherIcon } from "./icon-manager";
 
-let inputCity = "Москва";
-
-export async function renderWeather(сity) {
+export async function renderWeather(сity: string) {
   const displayTemperature = document.querySelector(".utility__value");
   const displayCity = document.querySelector(".city");
 
-  let { temperature, city, wmoCode } = await getWeatherProcessedData(сity);
-  let weatherIcon = document.querySelector(".weather .utility__value");
+  // TODO: turn into type
 
-  displayTemperature.textContent = ``;
-  displayTemperature.textContent += `${temperature}°`;
+  const { temperature, city, wmoCode } = await getWeatherProcessedData(сity);
+  const weatherIcon = document.querySelector(".weather .utility__value");
 
-  displayCity.textContent = ``;
-  displayCity.textContent += `${city}`;
+  if (displayTemperature) {
+    displayTemperature.textContent = ``;
+    displayTemperature.textContent += `${temperature}°`;
+  }
 
-  weatherIcon.classList.remove("sun-icon", "cloud-icon", "rain-icon", "snow-icon");
-  weatherIcon.classList.add(getWeatherIcon(wmoCode));
+  if (displayCity) {
+    displayCity.textContent = ``;
+    displayCity.textContent += `${city}`;
+  }
+
+  if (weatherIcon) {
+    weatherIcon.classList.remove("sun-icon", "cloud-icon", "rain-icon", "snow-icon");
+    weatherIcon.classList.add(getWeatherIcon(wmoCode));
+  }
 
   console.log("Weather has rendered");
 }
 
-export async function changeCity() {
-  inputCity = prompt("Укажите город", "");
+export async function changeCity(currentCity: string) {
+  const inputCity = prompt("Укажите город", "");
   if (!inputCity) return;
 
   try {
-    await renderWeather(inputCity);
+    console.log(currentCity);
+    currentCity = inputCity;
+    console.log(currentCity);
+
+    await renderWeather(currentCity);
   } catch (error) {
     alert("Неправильно указан город");
-    changeCity();
+    changeCity(currentCity);
   }
 }
 
-async function getWeatherProcessedData(сity) {
+async function getWeatherProcessedData(сity: string) {
   const weatherProcessedData = {};
 
   const coordinates = await getCoordinates(сity);
@@ -48,8 +58,11 @@ async function getWeatherProcessedData(сity) {
   return weatherProcessedData;
 }
 
-async function getCoordinates(сity) {
+async function getCoordinates(сity: string) {
   const coordinatesRawData = await fetchCoordinatesRawData(сity);
+
+  // TODO: turn coordinates into type
+
   const coordinates = {};
 
   coordinates.latitude = coordinatesRawData.results[0].latitude;
@@ -59,15 +72,13 @@ async function getCoordinates(сity) {
   return coordinates;
 }
 
-async function fetchCoordinatesRawData(сity) {
-  let coordinatesData = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${сity}&count=1&language=ru&format=json`
-  );
+async function fetchCoordinatesRawData(сity: string) {
+  let coordinatesData = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${сity}&count=1&language=ru&format=json`);
   coordinatesData = await coordinatesData.json();
   return coordinatesData;
 }
 
-async function fetchWeatherRawData(сity) {
+async function fetchWeatherRawData(сity: string) {
   const coordinates = await getCoordinates(сity);
 
   let weatherData = await fetch(
@@ -78,5 +89,5 @@ async function fetchWeatherRawData(сity) {
 }
 
 window.addEventListener("newHour", () => {
-  renderWeather();
+  renderWeather(currentCity);
 });

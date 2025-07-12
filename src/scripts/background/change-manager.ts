@@ -2,8 +2,8 @@ import { date } from "../date-time";
 import { getRandomInt } from "../utils";
 import { timeRanges } from "./time-ranges";
 
-export function changeBackground(currentHour) {
-  const timeOfDay = determineBackground(currentHour);
+export function changeBackground(currentHour: number) {
+  const timeOfDay: string = determineBackground(currentHour);
 
   removeBackground();
   setBackground(timeOfDay);
@@ -13,7 +13,7 @@ export function changeBackground(currentHour) {
 
 export function setRandomBackground() {
   const currentBackgroundElement = document.querySelector(".background__item--showing[data-time]");
-  const currentBackgroundTime = currentBackgroundElement.dataset.time;
+  const currentBackgroundTime = currentBackgroundElement ? currentBackgroundElement.dataset.time : 0;
 
   let int = getRandomInt(0, 23);
   let isDifferentTime = currentBackgroundTime !== determineBackground(int);
@@ -33,15 +33,15 @@ function removeBackground() {
   backgrounds.forEach((item) => item.classList.remove("background__item--showing"));
 }
 
-function setBackground(timeOfDay) {
+function setBackground(timeOfDay: string) {
   const backgroundElement = document.querySelector(`[data-time=${timeOfDay}]`);
   if (backgroundElement) {
     backgroundElement.classList.add("background__item--showing");
   }
 }
 
-function determineBackground(currentHour) {
-  let timeOfDay;
+function determineBackground(currentHour: number) {
+  let timeOfDay: string = "";
 
   if (timeRanges.night.includes(currentHour)) {
     timeOfDay = "night";

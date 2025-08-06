@@ -1,6 +1,0 @@
-// TODO: turn into types
-
-const timeOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" };
-const dateOptions = { day: "2-digit", month: "long", weekday: "long" };
-
-export { timeOptions, dateOptions };

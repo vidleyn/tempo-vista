@@ -1,7 +1,22 @@
-# Time and weather widget
+# TempoVista - Time & Weather Widget
 
-A simple widget that shows date, time, weather and changes background depending on a time of day.
+A Single Page Application that displays the current time, date, and weather for a selected city, with dynamic wallpapers that change based on time of day or at random.
 
-### Screenshot
+## Features
 
-![](./screenshot.png)
+- **Time and Date** display for your region.
+- **Weather Information** based on the selected city.
+- **Dynamic Wallpapers** that adapt to the time of day.
+- Option to **randomly pick** a wallpaper from the collection.
+
+## Tech Stack
+
+- **Language:** TypeScript (strict mode enabled, custom type definitions for API responses)
+- **Framework/Library:** Vanilla JS with modular architecture
+- **Bundler:** Vite (fast HMR, optimized build output)
+- **Linting:** ESLint (with TypeScript plugin and Prettier integration)
+- **APIs:** Open-Meteo for weather data
+
+## Screenshot
+
+![](./screenshot.jpg)

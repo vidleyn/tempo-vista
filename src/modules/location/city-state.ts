@@ -5,15 +5,18 @@ import { DEFAUL_CITY } from "../../config/constants";
 export const city = {
   name: DEFAUL_CITY,
 
-  changeCity() {
+  async changeCity() {
+    const previousCity = this.name;
     const input = prompt("Укажите город", "");
+
     if (!input) return;
 
     try {
       this.name = input;
-      renderWeather();
-    } catch (error) {
+      await renderWeather();
+    } catch {
       alert("Неправильно указан город");
+      this.name = previousCity;
       this.changeCity();
     }
   },

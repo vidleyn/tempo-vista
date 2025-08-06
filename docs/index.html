@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>TempoVista - Time & Weather Widget</title>
+
+    <link
+      rel="shortcut icon"
+      href="./favicon.ico"
+      type="image/x-icon"
+    />
+
+
+    <script type="module" crossorigin src="./assets/index-DxR1Q_Ff.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BLR13BRh.css">
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="background__wrapper">
+        <ul class="background__list">
+          <li class="background__item background__item--overlay background__item--showing"></li>
+          <li
+            class="background__item"
+            data-time="night"
+          >
+            <img
+              src="./assets/01-jrQv61Ok.jpg"
+              alt="Ночное изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="morning"
+          >
+            <img
+              src="./assets/02-CLR5UDKl.jpg"
+              alt="Утреннее изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="day"
+          >
+            <img
+              src="./assets/03-DwKEvmUT.jpg"
+              alt="Дневное изображение"
+            />
+          </li>
+          <li
+            class="background__item"
+            data-time="evening"
+          >
+            <img
+              src="./assets/04-Pf_nyU12.jpg"
+              alt="Вечернее изображение"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dashboard container">
+      <div class="dashboard__wrapper">
+        <div class="utility utility__datetime">
+          <div class="date"></div>
+          <div
+            id="time"
+            class="time"
+          ></div>
+        </div>
+        <div class="utility__divider"></div>
+        <div class="utility utility__tools">
+          <div class="weather">
+            <div class="utility__value"></div>
+            <span class="utility__title city">Загрузка погоды</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons-wrapper">
+        <button class="random-background">
+          <span class="utility__title">Случайный фон</span>
+        </button>
+        <button class="random-background change-city">
+          <span class="utility__title">Изменить город</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

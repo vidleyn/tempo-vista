@@ -1,0 +1,20 @@
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  base: "./",
+
+  // build: {
+  // minify: false,
+  // sourcemap: true,
+  // esbuild: {
+  //   drop: ["console", "debugger"],
+  // },
+  // rollupOptions: {
+  //   output: {
+  //     entryFileNames: `assets/[name].js`,
+  //     chunkFileNames: `assets/[name].js`,
+  //     assetFileNames: `assets/[name].[ext]`,
+  //   },
+  // },
+  // },
+});

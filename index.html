@@ -2,18 +2,28 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Document</title>
+
+    <title>TempoVista - Time & Weather Widget</title>
+
+    <link
+      rel="shortcut icon"
+      href="./favicon.ico"
+      type="image/x-icon"
+    />
+
     <link
       rel="stylesheet"
-      href="styles/main.css"
+      href="./src/styles/main.css"
     />
+
     <script
       type="module"
-      src="scripts/main.js"
+      src="./src/main.js"
     ></script>
   </head>
 
@@ -27,7 +37,7 @@
             data-time="night"
           >
             <img
-              src="./images/01.jpg"
+              src="./src/assets/images/01.jpg"
               alt="Ночное изображение"
             />
           </li>
@@ -36,7 +46,7 @@
             data-time="morning"
           >
             <img
-              src="./images/02.jpg"
+              src="./src/assets/images/02.jpg"
               alt="Утреннее изображение"
             />
           </li>
@@ -45,7 +55,7 @@
             data-time="day"
           >
             <img
-              src="./images/03.jpg"
+              src="./src/assets/images/03.jpg"
               alt="Дневное изображение"
             />
           </li>
@@ -54,7 +64,7 @@
             data-time="evening"
           >
             <img
-              src="./images/04.jpg"
+              src="./src/assets/images/04.jpg"
               alt="Вечернее изображение"
             />
           </li>
@@ -80,9 +90,14 @@
         </div>
       </div>
 
-      <button class="random-background">
-        <span class="utility__title">Случайный фон</span>
-      </button>
+      <div class="buttons-wrapper">
+        <button class="random-background">
+          <span class="utility__title">Случайный фон</span>
+        </button>
+        <button class="random-background change-city">
+          <span class="utility__title">Изменить город</span>
+        </button>
+      </div>
     </div>
   </body>
 </html>
